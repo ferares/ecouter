@@ -1,0 +1,70 @@
+{
+  "name": "Écouter",
+  "short_name": "Écouter",
+  "theme_color": "#orange",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "display_override": [],
+  "scope": ".",
+  "start_url": "./",
+  "orientation": "portrait",
+  "description": "",
+  "dir": "ltr",
+  "lang": "fr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "categories": ["education", "multimedia"],
+  "iarc_rating_id": "",
+  "shortcuts": [],
+  "icons": [
+    {
+      "src": "favicon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": []
+}

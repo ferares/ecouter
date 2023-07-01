@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.png" sizes="16x16">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/favicon-96.png" sizes="96x96">
+  <link rel="icon" href="/favicon-128.png" sizes="128x128">
+  <link rel="icon" href="/favicon-180.png" sizes="180x180">
+  <link rel="icon" href="/favicon-192.png" sizes="192x192">
+  <link rel="icon" href="/favicon-512.png" sizes="512x512">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="orange">
+  <title>Écouter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&family=Open+Sans:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+  <!-- Dialog polyfill -->
+  <link rel="stylesheet" href="/polyfills/dialog-polyfill.css">
+  <script src="/polyfills/dialog-polyfill.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+  <div class="loader" role="status" js-loader>
+    <div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <header class="main-header">
+    <div class="max-width main-header__content">
+      <h1 class="main-header__heading">
+        <img class="main-header__img" src="/imgs/headphones.svg" alt="Écouter">
+        <span class="book-heading">
+          <span class="book-heading__title" js-title></span>
+          <span class="book-heading__subtitle" js-subtitle></span>
+        </span>
+      </h1>
+      <button type="button" class="toggler-btn" aria-label="Basculer la navigation" js-nav-toggle="main-nav" aria-controls="main-nav" aria-expanded="false">
+        <div class="icon-burger">
+          <span class="icon-burger__line"></span>
+          <span class="icon-burger__line"></span>
+          <span class="icon-burger__line"></span>
+        </div>
+      </button>
+    </div>
+    <nav id="main-nav" class="main-nav" js-nav="main-nav" aria-hidden="true">
+      <div class="main-nav__content" js-nav-content>
+        <ol class="main-nav__list" js-nav-list></ol>
+      </div>
+    </nav>
+  </header>
+  <main class="max-width main-content" js-main></main>
+  <dialog js-dialog class="dialog">
+    <header class="dialog__header">
+      <button type="button" class="dialog__close" aria-label="Fermer" js-dialog-close>
+        <span class="icon-arrow"></span>
+      </button>
+      <h2 class="dialog__heading">
+        <span class="dialog__heading__title" js-dialog-title></span>
+        <span class="book-heading">
+          <span class="book-heading__title" js-title></span>
+          <span class="book-heading__subtitle" js-subtitle></span>
+        </span>
+      </h2>
+    </header>
+    <div class="dialog__content">
+      <div class="player">
+        <div class="player__track-wrapper">
+          <input type="range" class="player__track" min="0" max="1000" value="0" js-player-track>
+          <span js-player-time></span>
+          <span js-player-duration></span>
+        </div>
+        <div class="player__controls">
+          <button type="button" class="player__btn player__back">
+            <img class="player__btn__img player__btn__img--back" src="/imgs/back.svg" alt="5 secondes en arrière" js-player-back>
+          </button>
+          <button type="button" class="player__btn player__play" js-player-play>
+            <img class="player__btn__img player__btn__img--play" src="/imgs/play.svg" alt="Jouer">
+            <img class="player__btn__img player__btn__img--pause" src="/imgs/pause.svg" alt="Pause">
+          </button>
+          <button type="button" class="player__btn player__forward" aria-label="avance 5 secondes" js-player-forward>
+            <img class="player__btn__img player__btn__img--forward" src="/imgs/back.svg" alt="">
+          </button>
+        </div>
+      </div>
+      <audio src="" preload="auto" class="dialog__audio" js-audio></audio>
+    </div>
+  </dialog>
+</body>
+</html>
