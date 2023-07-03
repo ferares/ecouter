@@ -5,6 +5,7 @@ export default class Player extends HTMLElement {
   private canvasContext: CanvasRenderingContext2D
   private audioAnalyser: AnalyserNode
   private audioContext: AudioContext
+  private animationFrame?: number
   
   constructor() {
     super()
@@ -23,7 +24,6 @@ export default class Player extends HTMLElement {
     const source = this.audioContext.createMediaElementSource(this.audioElement)
     source.connect(this.audioAnalyser)
     this.audioAnalyser.connect(this.audioContext.destination)
-    this.frameLooper()
 
     this.playPauseBtn = this.querySelector('[js-player-play]') as HTMLButtonElement
     const back = this.querySelector('[js-player-back]') as HTMLButtonElement
@@ -64,8 +64,7 @@ export default class Player extends HTMLElement {
   }
 
   private frameLooper() {
-    window.requestAnimationFrame(this.frameLooper)
-    this.audioContext.resume()
+    this.animationFrame = window.requestAnimationFrame(this.frameLooper)
     const { width: canvasWidth, height: canvasHeight } = this.canvas.getBoundingClientRect()
     this.canvas.width = canvasWidth
     this.canvas.height = canvasHeight
@@ -79,16 +78,18 @@ export default class Player extends HTMLElement {
     for (var i = 0; i < barCount; i++) {
       const barPos = i * 16
       const barWidth = 8
-      const barHeight = - fbcArray[i]
+      const barHeight = - fbcArray[i] / 2
       this.canvasContext.fillRect(barPos, this.canvas.height, barWidth, barHeight)
     }
   }
 
   setSrc(src: string) {
     this.audioElement.src = src
+    this.audioContext.resume()
   }
 
   play() {
+    this.frameLooper()
     this.audioElement.play()
     this.playPauseBtn.classList.add('pause')
   }
@@ -96,5 +97,6 @@ export default class Player extends HTMLElement {
   pause() {
     this.audioElement.pause()
     this.playPauseBtn.classList.remove('pause')
+    if (this.animationFrame) window.cancelAnimationFrame(this.animationFrame)
   }
 }
