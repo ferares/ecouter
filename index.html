@@ -24,14 +24,14 @@
   <script type="module" src="/src/main.ts"></script>
 </head>
 <body>
-  <div class="loader" role="status" js-loader>
+  <ecouter-loader class="loader" role="status" js-loader>
     <div class="spinner">
       <div></div>
       <div></div>
       <div></div>
       <div></div>
     </div>
-  </div>
+  </ecouter-loader>
   <header class="main-header">
     <div class="max-width main-header__content">
       <h1 class="main-header__heading">
@@ -56,7 +56,7 @@
     </nav>
   </header>
   <main class="max-width main-content" js-main></main>
-  <dialog js-dialog class="dialog">
+  <dialog is="ecouter-modal" js-dialog class="dialog">
     <header class="dialog__header">
       <button type="button" class="dialog__close" aria-label="Fermer" js-dialog-close>
         <span class="icon-arrow"></span>
@@ -70,7 +70,9 @@
       </h2>
     </header>
     <div class="dialog__content">
-      <div class="player">
+      <ecouter-player class="player" js-player>
+        <audio src="" preload="auto" class="dialog__audio" js-audio></audio>
+        <canvas js-canvas class="player__canvas"></canvas>
         <div class="player__track-wrapper">
           <input type="range" class="player__track" min="0" max="1000" value="0" js-player-track>
           <span js-player-time></span>
@@ -88,8 +90,7 @@
             <img class="player__btn__img player__btn__img--forward" src="/imgs/back.svg" alt="">
           </button>
         </div>
-      </div>
-      <audio src="" preload="auto" class="dialog__audio" js-audio></audio>
+      </ecouter-player>
     </div>
   </dialog>
 </body>

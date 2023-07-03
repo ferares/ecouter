@@ -1,5 +1,11 @@
-interface Window {
-  dialogPolyfill: any,
+import { initDialog, openAudioDialog } from './dialog'
+import Loader from './elements/loader'
+import Player from './elements/player'
+
+declare global {
+  interface Window {
+    dialogPolyfill: any,
+  }
 }
 
 declare type Track = {
@@ -20,20 +26,9 @@ declare type Book = {
 
 let books: Book[]
 
-function setLoader(status: boolean) {
-  const loader = document.querySelector('[js-loader]')
-  if (!loader) return
-  if (status) {
-    loader.classList.add('active')
-    document.body.style.overflow = 'hidden'
-  } else {
-    loader.classList.remove('active')
-    document.body.style.overflow = 'auto'
-  }
-}
-
 async function fetchData() {
-  setLoader(true)
+  const loader = document.querySelector('[js-loader]') as Loader
+  loader.show()
   try {
     const res = await fetch('/data.json?v=1')
     return await res.json()
@@ -41,7 +36,7 @@ async function fetchData() {
     console.error(error)
     return null
   } finally {
-    setLoader(false)
+    loader.hide()
   }
 }
 
@@ -56,49 +51,6 @@ function getSelectedBook() {
 
 function setSelectedBook(book: number) {
   localStorage.setItem('book', book.toString())
-}
-
-function formatTime(time: number) {
-  let minutes: number | string = Math.floor(time / 60)
-  let seconds: number | string = Math.floor(time % 60)
-  if (minutes < 10) minutes = `0${minutes}`
-  if (seconds < 10) seconds = `0${seconds}`
-  return `${minutes}:${seconds}`
-}
-
-function initPlayer() {
-  const dialog = document.querySelector('[js-dialog]') as HTMLDialogElement
-  const player = dialog.querySelector('[js-audio]') as HTMLAudioElement
-  const playPause = dialog.querySelector('[js-player-play]') as HTMLButtonElement
-  const back = dialog.querySelector('[js-player-back]') as HTMLButtonElement
-  const forward = dialog.querySelector('[js-player-forward]') as HTMLButtonElement
-  const track = dialog.querySelector('[js-player-track]') as HTMLInputElement
-  const time = dialog.querySelector('[js-player-time]') as HTMLSpanElement
-  const duration = dialog.querySelector('[js-player-duration]') as HTMLSpanElement
-  time.innerHTML = '00:00'
-  duration.innerHTML = '00:00'
-  track.value = '0'
-  playPause.addEventListener('click', () => player.paused ? player.play() : player.pause())
-  back.addEventListener('click', () => player.currentTime -= 5)
-  forward.addEventListener('click', () => player.currentTime += 5)
-  track.addEventListener('change', () => player.currentTime = (Number(track.value) * player.duration) / 1000)
-  track.addEventListener('pointerdown', () => track.classList.add('hold'))
-  track.addEventListener('pointerup', () => track.classList.remove('hold'))
-  document.addEventListener('touchend', () => track.classList.remove('hold'))
-  player.addEventListener('pause', () => playPause.classList.remove('pause'))
-  player.addEventListener('play', () => playPause.classList.add('pause'))
-  player.addEventListener('durationchange', () => {
-    time.innerHTML = '00:00'
-    track.value = '0'
-    duration.innerHTML = formatTime(player.duration)
-  })
-  player.addEventListener('timeupdate', () => {
-    const currentTime = player.currentTime
-    time.innerHTML = formatTime(currentTime)
-    if (!track.classList.contains('hold')) track.value = ((currentTime * 1000) / player.duration).toString()
-  })
-  dialog.addEventListener('close', () => player.pause())
-  return player
 }
 
 function openNav() {
@@ -162,41 +114,6 @@ function createSection(title: string, index: number) {
   button.classList.add('accordion__btn')
   button.addEventListener('click', () => toggleAccordion(accordion))
   return { section, list }
-}
-
-async function getBlob(src: string): Promise<string> {
-  return new Promise((resolve) => {
-    const request = new XMLHttpRequest()
-    request.open('GET', src, true)
-    request.responseType = 'blob'
-    request.onload = () => resolve(URL.createObjectURL(request.response))
-    request.send()
-  })
-}
-
-function handleDialogCloseOnNavigation() {
-  closeAudioDialog()
-}
-
-async function openAudioDialog(label: string, src: string) {
-  const dialog = document.querySelector('[js-dialog]') as HTMLDialogElement
-  const audio = dialog.querySelector('[js-audio]') as HTMLAudioElement
-  const title = dialog.querySelector('[js-dialog-title]') as HTMLSpanElement
-  title.innerHTML = label
-  setLoader(true)
-  audio.src = await getBlob(src)
-  setLoader(false)
-  audio.play()
-  dialog.showModal()
-  document.body.style.overflowY = 'hidden'
-  window.history.pushState({ dialog: true }, 'dialog-open')
-  window.addEventListener('popstate', handleDialogCloseOnNavigation)
-}
-
-function closeAudioDialog() {
-  const dialog = document.querySelector('[js-dialog]') as HTMLDialogElement
-  dialog.close()
-  document.body.style.overflowY = 'auto'
 }
 
 function createAudioItem(unitIndex: number, audioIndex: number, audio: Track) {
@@ -300,18 +217,16 @@ function loadData(data: Book[]) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Register custom HTML elements
+  customElements.define('ecouter-player', Player)
+  customElements.define('ecouter-loader', Loader)
   // Init navigation toggler
   document.querySelector('[js-nav-toggle]')?.addEventListener('click', () => toggleNav())
   document.querySelector('[js-nav]')?.addEventListener('click', () => closeNav())
   document.querySelector('[js-nav-content]')?.addEventListener('click', (event) => event.stopPropagation())
   document.addEventListener('keydown', (event) => { if (event.code === 'Escape') closeNav() })
   // Init dialog
-  const dialog = document.querySelector('[js-dialog]') as HTMLDialogElement
-  // Dialog polyfill
-  window.dialogPolyfill.registerDialog(dialog)
-  document.querySelector('[js-dialog-close]')?.addEventListener('click', closeAudioDialog)
-  // Init player
-  initPlayer()
+  initDialog()
   // Load data
   fetchData().then(loadData)
 })
