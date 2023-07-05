@@ -4,6 +4,10 @@
 
 Project I did for my French class. My teacher needed an easy way to play the audios from our text book either from her laptop, cellphone or tablet. There was no way to read the original CDs, a pendrive wasn't a good solution for mobile devices, Google Drive proved to be too slow and cumbersome and the same can be said about some books' web sites.
 
+## Demo
+
+![](https://github.com/ferares/ecouter/blob/main/demo.gif)
+
 ## Features
 
 - The project can be deployed to a public server available to both teachers and students worldwide.
