@@ -229,4 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initDialog()
   // Load data
   fetchData().then(loadData)
+  // Register the service worker
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('/service-worker.js')
+  }
 })

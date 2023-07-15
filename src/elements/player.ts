@@ -64,6 +64,7 @@ export default class Player extends HTMLElement {
   }
 
   private frameLooper() {
+    // https://orangeable.com/javascript/equalizer-web-audio-api
     this.animationFrame = window.requestAnimationFrame(this.frameLooper)
     const { width: canvasWidth, height: canvasHeight } = this.canvas.getBoundingClientRect()
     this.canvas.width = canvasWidth
