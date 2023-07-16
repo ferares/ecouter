@@ -13,7 +13,7 @@ if (workbox.navigationPreload.isSupported()) {
 }
 
 workbox.routing.registerRoute(
-  new RegExp('/*'),
+  (extendableEvent) => !extendableEvent.url.pathname.includes('/tracks'),
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: CACHE
   })

@@ -28,4 +28,4 @@ You'll need [Node.js](https://nodejs.org) & [npm](https://www.npmjs.com/) for bu
 
 After installing those, on the project root directory, just run `npm i` to install the build dependencies and then either `npm run dev` to startup a development server or `npm run build` to build the project into the `dist` folder
 
-Finally you'll want to add some audio tracks to a subfolder in the `public` directory and then create a `data.json` file (also placed in the public directory) with the info of all the tracks you've just added. The data structure of the `data.json` file must follow the `Book[]` type as defined in `src/main.ts`.
+Finally you'll want to add some audio tracks to a subfolder named `tracks` in the `public` directory and then create a `data.json` file (also placed in the public directory) with the info of all the tracks you've just added. The data structure of the `data.json` file must follow the `Book[]` type as defined in `src/main.ts`.
