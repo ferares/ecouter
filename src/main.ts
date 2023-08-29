@@ -30,7 +30,7 @@ async function fetchData() {
   const loader = document.querySelector('[js-loader]') as Loader
   loader.show()
   try {
-    const res = await fetch('/data.json?v=1')
+    const res = await fetch('/data.json?v=2')
     return await res.json()
   } catch (error) {
     console.error(error)
