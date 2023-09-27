@@ -20,6 +20,8 @@
 .main-nav__content {
   background-color: var(--color-primary);
   display: flex;
+  overflow: auto;
+  max-height: 100%;
   max-width: 450px;
   padding: 2rem;
   transition: all var(--transition);
