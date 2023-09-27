@@ -5,6 +5,7 @@ import Player from './elements/player'
 declare global {
   interface Window {
     dialogPolyfill: any,
+    webkitAudioContext: AudioContext,
   }
 }
 
@@ -123,10 +124,12 @@ function createAudioItem(unitIndex: number, audioIndex: number, audio: Track) {
   icon.src = '/imgs/headphones.svg'
   icon.classList.add('section__btn__img')
   icon.alt = ''
+  const audioLabel = document.createElement('span')
+  audioLabel.innerText = audio.label
   btn.classList.add('section__btn')
   btn.addEventListener('click', () => openAudioDialog(audio.label, audio.src))
   btn.appendChild(icon)
-  btn.append(audio.label)
+  btn.append(audioLabel)
   item.appendChild(btn)
   item.classList.add('section__list__item')
   item.id = `u${unitIndex}a${audioIndex}`

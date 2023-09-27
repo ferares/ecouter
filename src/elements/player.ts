@@ -1,10 +1,16 @@
+function isAudioContextSupported() {
+  window.AudioContext = window.AudioContext || window.webkitAudioContext
+  if (window.AudioContext) return true
+  return false
+}
+
 export default class Player extends HTMLElement {
   private audioElement: HTMLAudioElement
   private playPauseBtn: HTMLButtonElement
   private canvas: HTMLCanvasElement
   private canvasContext: CanvasRenderingContext2D
-  private audioAnalyser: AnalyserNode
-  private audioContext: AudioContext
+  private audioAnalyser?: AnalyserNode
+  private audioContext?: AudioContext
   private animationFrame?: number
   
   constructor() {
@@ -19,11 +25,13 @@ export default class Player extends HTMLElement {
     this.audioElement = this.querySelector('[js-audio]') as HTMLAudioElement
     this.canvas = this.querySelector('[js-canvas]') as HTMLCanvasElement
     this.canvasContext = this.canvas.getContext('2d') as CanvasRenderingContext2D
-    this.audioContext = new AudioContext()
-    this.audioAnalyser = this.audioContext.createAnalyser()
-    const source = this.audioContext.createMediaElementSource(this.audioElement)
-    source.connect(this.audioAnalyser)
-    this.audioAnalyser.connect(this.audioContext.destination)
+    if (isAudioContextSupported()) {
+      this.audioContext = new AudioContext()
+      this.audioAnalyser = this.audioContext.createAnalyser()
+      const source = this.audioContext.createMediaElementSource(this.audioElement)
+      source.connect(this.audioAnalyser)
+      this.audioAnalyser.connect(this.audioContext.destination)
+    }
 
     this.playPauseBtn = this.querySelector('[js-player-play]') as HTMLButtonElement
     const back = this.querySelector('[js-player-back]') as HTMLButtonElement
@@ -64,6 +72,7 @@ export default class Player extends HTMLElement {
   }
 
   private frameLooper() {
+    if (!this.audioAnalyser) return
     // https://orangeable.com/javascript/equalizer-web-audio-api
     this.animationFrame = window.requestAnimationFrame(this.frameLooper)
     const { width: canvasWidth, height: canvasHeight } = this.canvas.getBoundingClientRect()
@@ -86,13 +95,17 @@ export default class Player extends HTMLElement {
 
   setSrc(src: string) {
     this.audioElement.src = src
-    this.audioContext.resume()
+    this.audioContext?.resume()
   }
 
-  play() {
+  async play() {
     this.frameLooper()
-    this.audioElement.play()
-    this.playPauseBtn.classList.add('pause')
+    try {
+      await this.audioElement.play()
+      this.playPauseBtn.classList.add('pause')
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   pause() {

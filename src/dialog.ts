@@ -10,13 +10,9 @@ function initDialog() {
 }
 
 async function getBlob(src: string): Promise<string> {
-  return new Promise((resolve) => {
-    const request = new XMLHttpRequest()
-    request.open('GET', src, true)
-    request.responseType = 'blob'
-    request.onload = () => resolve(URL.createObjectURL(request.response))
-    request.send()
-  })
+  const response = await fetch(src)
+  const blob = await response.blob()
+  return URL.createObjectURL(blob)
 }
 
 function handleDialogCloseOnNavigation() {
@@ -43,7 +39,7 @@ function closeAudioDialog() {
   const dialog = document.querySelector('[js-dialog]') as HTMLDialogElement
   const player = dialog.querySelector('[js-player]') as Player
   player.pause()
-  dialog.close()
+  if (dialog.open) dialog.close()
   document.body.style.overflowY = 'auto'
 }
 
