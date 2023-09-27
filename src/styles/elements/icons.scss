@@ -1,0 +1,38 @@
+.icon-close {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.icon-close__line {
+  background-color: #000;
+  height: .1rem;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.icon-close__line:nth-child(1) {
+  transform: translateY(.5rem) rotate(-45deg);
+}
+
+.icon-close__line:nth-child(2) {
+  transform: translateY(-.4rem) rotate(45deg);
+}
+
+.icon-arrow {
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  display: block;
+  flex-shrink: 0;
+  height: 1.125rem;
+  margin-bottom: .5rem;
+  margin-left: auto;
+  margin-right: .5rem;
+  position: relative;
+  transform: rotate(45deg);
+  transform-origin: 66% 66% 0px;
+  transition: transform var(--transition);
+  width: 1.125rem;
+  z-index: -1;
+}

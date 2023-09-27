@@ -1,0 +1,66 @@
+.dialog {
+  border: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  max-height: 100%;
+  max-width: 100%;
+  padding: 2rem 1rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.dialog__header {
+  align-items: center;
+  display: flex;
+  gap: .5rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  width: var(--max-width);
+}
+
+.dialog__close {
+  height: 1rem;
+  transform: rotate(90deg);
+  width: 1.4rem;
+}
+
+.dialog__heading {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.dialog__heading__title {
+  flex-shrink: 0;
+  font-size: 2.1rem;
+  line-height: .9;
+}
+
+.dialog__heading .book-heading {
+  color: #595959;
+  flex-shrink: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dialog__heading .book-heading__title,
+.dialog__heading .book-heading__subtitle {
+  font-size: 1rem;
+}
+
+.dialog__content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  margin: 0 auto;
+  max-width: 100%;
+  width: var(--max-width);
+}

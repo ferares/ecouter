@@ -1,0 +1,43 @@
+.main-nav {
+  background-color: var(--color-overlay);
+  display: flex;
+  height: calc(100vh - 84px);
+  justify-content: end;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  transition: all var(--transition);
+  width: 100%;
+  z-index: 100;
+}
+
+.main-nav:not(.open) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.main-nav__content {
+  background-color: var(--color-primary);
+  display: flex;
+  max-width: 450px;
+  padding: 2rem;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.main-nav:not(.open) .main-nav__content {
+  transform: translateX(100%);
+}
+
+.main-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: inherit;
+  font-size: 2rem;
+  text-align: left;
+}

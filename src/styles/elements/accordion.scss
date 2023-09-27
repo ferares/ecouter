@@ -1,0 +1,29 @@
+.accordion {
+  display: grid;
+  grid-template-rows: 1fr;
+  margin-top: .5rem;
+  transition: all var(--transition);
+}
+
+.accordion:not(.open) {
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  visibility: hidden;
+}
+
+.accordion__btn {
+  align-items: center;
+  display: flex;
+  gap: .5rem;
+  text-align: left;
+  width: 100%;
+}
+
+.accordion__btn:not(.open) .icon-arrow {
+  transform: rotate(-45deg);
+}
+
+.accordion__content {
+  margin: 1rem 0;
+  overflow: hidden;
+}

@@ -1,0 +1,83 @@
+.main-header {
+  align-items: center;
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow);
+  display: flex;
+  height: 84px;
+  padding: 1rem 0;
+  position: sticky;
+  position: relative; // Fallback for iOS 12
+  top: 0;
+  z-index: 100;
+}
+
+.main-header__content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-header__heading {
+  align-items: center;
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1rem;
+}
+
+.main-header__img {
+  width: 2rem;
+}
+
+.book-heading {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.book-heading__title {
+  flex-shrink: 0;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.book-heading__subtitle {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.toggler-btn {
+  background-color: #0000;
+  border: 0;
+  height: 1rem;
+  padding: 0;
+  width: 1.4rem;
+}
+
+.icon-burger {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.icon-burger__line {
+  background-color: #000;
+  height: .1rem;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.toggler-btn.open .icon-burger__line:nth-child(1) {
+  transform: translateY(.5rem) rotate(-45deg);
+}
+
+.toggler-btn.open .icon-burger__line:nth-child(2) {
+  opacity: 0;
+}
+
+.toggler-btn.open .icon-burger__line:nth-child(3) {
+  transform: translateY(-.4rem) rotate(45deg);
+}

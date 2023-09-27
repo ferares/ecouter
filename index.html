@@ -20,7 +20,7 @@
   <!-- Dialog polyfill -->
   <link rel="stylesheet" href="/polyfills/dialog-polyfill.css">
   <script src="/polyfills/dialog-polyfill.js"></script>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/src/styles/main.scss">
   <script type="module" src="/src/main.ts"></script>
 </head>
 <body>
@@ -56,8 +56,8 @@
     </nav>
   </header>
   <main class="max-width main-content" js-main></main>
-  <dialog is="ecouter-modal" js-dialog class="dialog">
-    <header class="dialog__header">
+  <dialog js-dialog class="dialog">
+    <header class="dialog__header  max-width">
       <button type="button" class="dialog__close" aria-label="Fermer" js-dialog-close>
         <span class="icon-arrow"></span>
       </button>
