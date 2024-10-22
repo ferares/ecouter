@@ -24,8 +24,8 @@ Project I did for my French class. My teacher needed an easy way to play the aud
 
 ## How to use
 
-You'll need [Node.js](https://nodejs.org) & [npm](https://www.npmjs.com/) for building the project.
+You'll need [Node.js](https://nodejs.org) & [pnpm](https://pnpm.io/) for building the project.
 
-After installing those, on the project root directory, just run `npm i` to install the build dependencies and then either `npm run dev` to startup a development server or `npm run build` to build the project into the `dist` folder
+After installing those, on the project root directory, just run `pnpm i` to install the build dependencies and then either `pnpm dev` to startup a development server or `pnpm build` to build the project into the `dist` folder
 
 Finally you'll want to add some audio tracks to a subfolder named `tracks` in the `public` directory and then create a `data.json` file (also placed in the public directory) with the info of all the tracks you've just added. The data structure of the `data.json` file must follow the `Book[]` type as defined in `src/main.ts`.
