@@ -29,3 +29,7 @@ You'll need [Node.js](https://nodejs.org) & [pnpm](https://pnpm.io/) for buildin
 After installing those, on the project root directory, just run `pnpm i` to install the build dependencies and then either `pnpm dev` to startup a development server or `pnpm build` to build the project into the `dist` folder
 
 Finally you'll want to add some audio tracks to a subfolder named `tracks` in the `public` directory and then create a `data.json` file (also placed in the public directory) with the info of all the tracks you've just added. The data structure of the `data.json` file must follow the `Book[]` type as defined in `src/main.ts`.
+
+## Cache busting
+
+As a cache busting method for the `data.json` file we use a query string `?v={version_number}`. Remember to update that version number on the `src/main.ts:fetchData` function whenever you update the `data.json` file.
