@@ -6,7 +6,7 @@
   height: 84px;
   padding: 1rem 0;
   position: sticky;
-  position: relative; // Fallback for iOS 12
+  position: relative; /* Fallback for iOS 12 */
   top: 0;
   z-index: 100;
 }
@@ -65,13 +65,13 @@
 
 .icon-burger__line {
   background-color: #000;
-  height: .1rem;
+  height: 0.1rem;
   transition: all var(--transition);
   width: 100%;
 }
 
 .toggler-btn.open .icon-burger__line:nth-child(1) {
-  transform: translateY(.5rem) rotate(-45deg);
+  transform: translateY(0.5rem) rotate(-45deg);
 }
 
 .toggler-btn.open .icon-burger__line:nth-child(2) {
@@ -79,5 +79,5 @@
 }
 
 .toggler-btn.open .icon-burger__line:nth-child(3) {
-  transform: translateY(-.4rem) rotate(45deg);
+  transform: translateY(-0.4rem) rotate(45deg);
 }
